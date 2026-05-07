@@ -186,9 +186,6 @@ async function fetchProjects() {
                         ${techStackHtml}
                     </div>
                     <p>${project.description}</p>
-                    <a href="${project.link}" target="_blank" class="project-link">
-                        View Project <i class="fas fa-arrow-right"></i>
-                    </a>
                 </div>
             `;
             grid.appendChild(card);
