@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="/static/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -41,7 +41,7 @@
             <a href="#projects" class="cta-button">View My Work</a>
         </div>
         <div class="hero-image-container">
-            <img src="{{ url_for('static', filename='images/saina.png') }}" alt="Developer" class="profile-img">
+            <img src="/static/images/saina.png" alt="Developer" class="profile-img">
             <div class="img-glow"></div>
         </div>
         <div class="hero-shape"></div>
@@ -100,6 +100,6 @@
         <p>&copy; 2026 Saina Sensi. All rights reserved.</p>
     </footer>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="/static/js/script.js"></script>
 </body>
 </html>
