@@ -1,11 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
-const port = process.env.PORT || 5000;
 
 // Initialize Supabase Client
 const supabaseUrl = process.env.SUPABASE_URL || 'https://placeholder.supabase.co';
@@ -14,14 +12,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 app.use(cors());
 app.use(express.json());
-
-// Serve static files
-app.use('/static', express.static(path.join(__dirname, 'static')));
-
-// Serve main page
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'templates', 'index.html'));
-});
 
 // API Routes fetching from Supabase
 app.get('/api/projects', async (req, res) => {
@@ -34,7 +24,7 @@ app.get('/api/projects', async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
     
-    // Parse tech_stack correctly (stored as comma-separated string in supabase if matching old DB)
+    // Parse tech_stack correctly (stored as comma-separated string)
     const formattedProjects = (projects || []).map(p => ({
         ...p,
         tech_stack: p.tech_stack ? p.tech_stack.split(',').map(s => s.trim()) : []
@@ -56,8 +46,13 @@ app.get('/api/skills', async (req, res) => {
     res.json(skills || []);
 });
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+// For local testing
+if (process.env.NODE_ENV !== 'production') {
+    const port = process.env.PORT || 5000;
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    });
+}
 
+// Export the Express API
 module.exports = app;
